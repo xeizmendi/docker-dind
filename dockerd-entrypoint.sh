@@ -13,18 +13,18 @@ if [ "$#" -eq 0 -o "${1#-}" != "$1" ]; then
 fi
 
 if [ "$DOCKER_REGISTRY_MIRROR" ]; then
-  set -- --registry-mirror=$DOCKER_REGISTRY_MIRROR \
-    "$@"
+  set -- "$@" --registry-mirror=$DOCKER_REGISTRY_MIRROR
 fi
 
 if [ "$DOCKER_INSECURE_REGISTRY" ]; then
-  set -- --insecure-registry=$DOCKER_INSECURE_REGISTRY \
-    "$@"
+  set -- "$@" --insecure-registry=$DOCKER_INSECURE_REGISTRY
 fi
 
 if [ "$DOCKER_MAX_CONCURRENT_DOWNLOADS" ]; then
-  set -- --max-concurrent-downloads=$DOCKER_MAX_CONCURRENT_DOWNLOADS \
-    "$@"
+  if [ $1 == "dockerd" ]; then
+    shift
+  fi
+  set -- "$@" --max-concurrent-downloads=$DOCKER_MAX_CONCURRENT_DOWNLOADS
 fi
 
 if [ "$1" = 'dockerd' ]; then
