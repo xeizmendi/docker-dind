@@ -21,9 +21,6 @@ if [ "$DOCKER_INSECURE_REGISTRY" ]; then
 fi
 
 if [ "$DOCKER_MAX_CONCURRENT_DOWNLOADS" ]; then
-  if [ $1 == "dockerd" ]; then
-    shift
-  fi
   set -- "$@" --max-concurrent-downloads=$DOCKER_MAX_CONCURRENT_DOWNLOADS
 fi
 
