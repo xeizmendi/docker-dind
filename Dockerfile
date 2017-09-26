@@ -1,3 +1,3 @@
-FROM docker:1.12.5-dind
+FROM docker:17.06-dind
 
 COPY dockerd-entrypoint.sh /usr/local/bin/
